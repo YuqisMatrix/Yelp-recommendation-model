@@ -16,33 +16,33 @@ This project is containerized with Docker for consistent deployment across envir
 
 ## Project Structure
 
-
+```text
 .
 ├── app.py                        # Flask application entry point
-├── recommender.py                 # Core recommendation logic
-├── Dockerfile                     # Docker build instructions
-├── docker-compose.yml             # Compose config for deployment
-├── requirements.txt               # Python dependencies
-├── .dockerignore                  # Docker ignore rules
-├── readme.md                      # Project documentation
+├── recommender.py                # Core recommendation logic
+├── Dockerfile                    # Docker build instructions
+├── docker-compose.yml            # Compose config for deployment
+├── requirements.txt              # Python dependencies
+├── .dockerignore                 # Docker ignore rules
+├── readme.md                     # Project documentation
 │
-├── data/                          # Data files
-│   ├── business.json              # Business information
-│   ├── checkin.json               # Check-in data
-│   ├── photo.json                 # Photo metadata
-│   ├── pure_jaccard_similarity.csv# Similarity metrics
-│   ├── review_train.json          # Training reviews
-│   ├── tip.json                   # Tips data
-│   ├── user.json                  # User information
-│   ├── yelp_train.csv             # Training dataset
-│   ├── yelp_val.csv               # Validation dataset
-│   └── yelp_val_in.csv            # Input validation dataset
+├── data/                         # Data files
+│   ├── business.json             # Business information
+│   ├── checkin.json              # Check-in data
+│   ├── photo.json                # Photo metadata
+│   ├── pure_jaccard_similarity.csv # Similarity metrics
+│   ├── review_train.json         # Training reviews
+│   ├── tip.json                  # Tips data
+│   ├── user.json                 # User information
+│   ├── yelp_train.csv            # Training dataset
+│   ├── yelp_val.csv              # Validation dataset
+│   └── yelp_val_in.csv           # Input validation dataset
 │
-├── model/                         # Trained models & artifacts
+├── model/                        # Trained models & artifacts
 │   ├── yelp_model.pkl
 │   └── recommender_business/...
 │
-├── output/                        # Output files
+├── output/                       # Output files
 │   ├── low_error_demo.csv
 │   ├── optimized_predictions.csv
 │   ├── response_times.png
@@ -50,14 +50,15 @@ This project is containerized with Docker for consistent deployment across envir
 │   ├── top5_businesses.csv
 │   └── top5_users.csv
 │
-├── templates/                     # HTML templates for Flask
-│   ├── index.html                  # Homepage search form
-│   └── result.html                 # Prediction result page
+├── templates/                    # HTML templates for Flask
+│   ├── index.html                # Homepage search form
+│   └── result.html               # Prediction result page
 │
-├── logs/                          # Runtime logs
+├── logs/                         # Runtime logs
 │   ├── api.log
 │   ├── recommendation_system.log
 │   └── error_log.json
+```
 
 Local Development (Without Docker)
 ```bash
