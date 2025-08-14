@@ -88,19 +88,23 @@ This will start the API on http://localhost:5000 without building the image loca
 
 
 
-# Deploy to Docker Hub (For Developers)
+## Deploy to Docker Hub (For Developers)
 
 If you modify the code and want to push your own image:
 
+```bash
 docker login
 docker tag yelp-rec-spark:1.1 yuqizhang56/yelp-rec-spark:1.1
 docker push yuqizhang56/yelp-rec-spark:1.1
+```
 
 
 
 ## API Endpoints
 Health Check
+```bash
 curl http://localhost:5000/health
+```
 
 Predict Rating for a Specific User-Business Pair
 ```bash
