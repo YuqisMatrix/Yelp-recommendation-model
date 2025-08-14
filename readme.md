@@ -19,7 +19,9 @@ This project is containerized with Docker for consistent deployment across envir
 
 Due to GitHub's file size restrictions, only validation data is included in this repository. The complete training dataset can be downloaded from:
 
-**Complete Training Data:** https://drive.google.com/drive/folders/1y4rh1dXCzdCMY24fu_uRPwFf7EqbVISW?usp=sharing
+- Complete Training Data: https://drive.google.com/drive/folders/1y4rh1dXCzdCMY24fu_uRPwFf7EqbVISW?usp=sharing
+
+
 ---
 
 ## Project Structure
