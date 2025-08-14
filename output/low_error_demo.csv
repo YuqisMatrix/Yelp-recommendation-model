@@ -1,0 +1,16 @@
+user_id,business_id,pred_rating,true_rating,user_name,business_name,error,interval
+pZ6P_1V-bTSoYG1fg1TXzw,cpOELWhrJDdz5v1b3H5EcQ,1.9992759,2.0,Angel,Dairy Queen,0.0007240772247314453,1.0-2.0
+MaxlLd0HZmCtdZ3yJ9pyJQ,TTDMJetAQKfxVzKZy4Z_2Q,1.9991298,2.0,Belle,Allegiant Air,0.0008702278137207031,1.0-2.0
+MHn01HpwdCeaN3NbOVp0HA,Al-cFxIKoJpbPW9Roy0FEw,1.9982659,2.0,Kady,Swiss Chalet Rotisserie & Grill,0.0017341375350952148,1.0-2.0
+DmMFoQvKlfDoSxiEbLO7ng,fzRxHv7XnnDqTmX25tVbJg,2.9999936,3.0,Shawn,Taco Mac,6.4373016357421875e-06,2.0-3.0
+j55ySt8CuDQ0bahoVBAb_A,Cy1bPenka65T2AUBAn-WkQ,2.999983,3.0,Alice,T-Swirl Crêpe,1.6927719116210938e-05,2.0-3.0
+CxDOIDnH8gp9KXzpBHJYXw,CuR4Xxu_aHrYD0IGGRdm5Q,2.999751,3.0,Jennifer,South of Temperance,0.00024890899658203125,2.0-3.0
+GnbkuE6mWWBHr2UQR2KMnA,xfWdUmrz2ha3rcigyITV0g,3.9999948,4.0,Chase,Gordon Ramsay Burger,5.245208740234375e-06,3.0-4.0
+0FMte0z-repSVWSJ_BaQTg,pFQaji0idkrzv5J-qTQ82Q,3.0000122,3.0,Roger,Golden Corral,1.2159347534179688e-05,3.0-4.0
+sYSRSJVuZcLEM-_kQfIRNw,jLxeBgWhLRbII2ACkgH1Sg,3.999955,4.0,Junior,La Belle Terre French Bakery And Café,4.506111145019531e-05,3.0-4.0
+B2x3kEXXo8iUdtS9FhGO4A,YCEZLECK9IToE8Mysorbhw,4.0000024,4.0,Vilma,Daily Kitchen Modern Eatery and Rotisserie,2.384185791015625e-06,4.0-5.0
+P2oqCr2e-ZtXmsXVtSImeg,Twcjx4ofM9GWwXN6LVGSzw,4.0000186,4.0,Hannah,Merchant Madison,1.8596649169921875e-05,4.0-5.0
+ME1-IwMQMHkowOxffKUx7w,ZeLSZRm_l0Aw7idB3_fKbA,4.000057,4.0,David,Little's Shoes,5.7220458984375e-05,4.0-5.0
+YLlOU89RwpRfvk4H5tOQAA,A-uZAD4zP3rRxb44WUGV5w,5.0,5.0,Erica,Soho Japanese Restaurant,0.0,4.9-5.1
+5VHWTXocEYwxoJe0vG1BJA,R98xd_D7pRDOFsLd_EOymQ,5.0,5.0,Erik,Shenker Academy,0.0,4.9-5.1
+keBv05MsMFBd0Hu98vXThQ,Az_60nNuh1FH8Ds8oasZjw,5.0,5.0,Jesse,Encore,0.0,4.9-5.1

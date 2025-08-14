@@ -1,0 +1,193 @@
+# Yelp Recommendation System .gitignore
+
+# ================================
+# Large Data Files (3GB+ raw data)
+# ================================
+data/yelp_train.csv
+data/business.json
+data/user.json
+data/review_train.json
+data/photo.json
+data/checkin.json
+data/tip.json
+data/pure_jaccard_similarity.csv
+
+# Keep small validation file
+!data/yelp_val.csv
+
+# ================================
+# Python
+# ================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# ================================
+# Virtual Environments
+# ================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ================================
+# IDE and Editor Files
+# ================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ================================
+# Operating System Files
+# ================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+
+# ================================
+# Application Specific
+# ================================
+# Log files
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Large model files (if over 100MB)
+# Uncomment if your model files are too large for GitHub
+# model/yelp_model.pkl
+
+# Spark logs and checkpoints
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ================================
+# Docker
+# ================================
+# Docker volumes
+.docker/
+
+# ================================
+# Environment Variables
+# ================================
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ================================
+# Backup Files
+# ================================
+*.bak
+*.backup
+*.old
+*.orig

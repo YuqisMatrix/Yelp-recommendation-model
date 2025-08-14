@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  web:
+    image: yelp-rec-spark:1.1
+    ports:
+      - "5000:5000"
+    environment:
+      MODEL_PATH: /app/model/yelp_model.pkl
+      CF_ARTIFACTS_DIR: /app/model/recommender_business
+      DATA_FOLDER: /app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:5000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+   
+    command: >
+      gunicorn -w 1 -k gthread --threads 4 --timeout 300
+      -b 0.0.0.0:5000 app:app

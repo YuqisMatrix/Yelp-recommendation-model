@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yelp Rating Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .page { max-width: 1080px; }
+    .id-chip { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .card-title small { font-weight: 400; }
+    .grid-empty { display:none; }
+    .user-name { font-weight: 600; }
+  </style>
+</head>
+
+<body>
+  <div class="container page py-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h1 class="h3 mb-0">Yelp Rating Demo</h1>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-pills mb-3" id="featureTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="predict-tab" data-bs-toggle="tab" data-bs-target="#tabPredict" type="button" role="tab" aria-controls="tabPredict" aria-selected="true">Predict</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="recommend-tab" data-bs-toggle="tab" data-bs-target="#tabRecommend" type="button" role="tab" aria-controls="tabRecommend" aria-selected="false">Recommend</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- ===================== PREDICT TAB ===================== -->
+      <div class="tab-pane fade show active" id="tabPredict" role="tabpanel" aria-labelledby="predict-tab">
+        <div class="row g-4">
+          <!-- Left: Predict form (unchanged) -->
+          <div class="col-md-6">
+            <form action="/predict" method="POST" class="vstack gap-3">
+              <!-- User ID -->
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-3">User</h5>
+
+                  <label class="form-label">Select User ID (optional)</label>
+                  <select id="user_select" name="user_id" class="form-select mb-2">
+                    <option value="">-- Select from list (optional) --</option>
+                    {% for u in users %}
+                      <option value="{{ u }}">{{ u }}</option>
+                    {% endfor %}
+                  </select>
+
+                  <div class="text-secondary small mb-2">OR</div>
+
+                  <label class="form-label">Enter User ID manually</label>
+                  <input type="text" name="user_id_manual" class="form-control" placeholder="e.g. 48vRThjhuhiSQINQ2KV8Sw">
+                </div>
+              </div>
+
+              <!-- Business ID -->
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-3">Business</h5>
+
+                  <label class="form-label">Select Business ID (optional)</label>
+                  <select id="biz_select" name="product_id" class="form-select mb-2">
+                    <option value="">-- Select from list (optional) --</option>
+                    {% for b in products %}
+                      <option value="{{ b }}">{{ b }}</option>
+                    {% endfor %}
+                  </select>
+
+                  <div class="text-secondary small mb-2">OR</div>
+
+                  <label class="form-label">Enter Business ID manually</label>
+                  <input type="text" name="product_id_manual" class="form-control" placeholder="e.g. fThrN4tfupIGetkrz18JOg">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Predict Rating</button>
+            </form>
+          </div>
+
+          <!-- Right: Demo pairs (paged 6 per page) -->
+          <div class="col-md-6">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h6 class="mb-0">Demo pairs</h6>
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm btn-outline-secondary" type="button" id="prevPage">Prev</button>
+                <span class="small text-muted" id="pageIndicator">Page 1/1</span>
+                <button class="btn btn-sm btn-outline-secondary" type="button" id="nextPage">Next</button>
+              </div>
+            </div>
+
+            <div id="pairsEmpty" class="alert alert-secondary grid-empty">No demo pairs available.</div>
+            <div class="row g-3" id="pairsGrid">
+              <!-- cards injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== RECOMMEND TAB ===================== -->
+      <div class="tab-pane fade" id="tabRecommend" role="tabpanel" aria-labelledby="recommend-tab">
+        <div class="row g-4">
+          <!-- Top: form -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Get recommendations</h5>
+                <div class="row g-3">
+                  <div class="col-md-5">
+                    <label class="form-label">Pick a user id</label>
+                    <select id="rec_user_select" class="form-select">
+                      <option value="">-- pick a user --</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">Or enter User ID manually</label>
+                    <input id="rec_user_manual" type="text" class="form-control" placeholder="e.g. 48vRThjhuhiSQINQ2KV8Sw">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">K</label>
+                    <select id="rec_k" class="form-select">
+                      <option>5</option>
+                      <option selected>10</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary mt-3" id="btnGetRecs">Get Recommendations</button>
+                <div id="recAlert" class="alert alert-danger mt-3 d-none"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results list -->
+          <div class="col-12">
+            <h6 id="recHeader" class="mb-2 text-muted"></h6>
+            <div class="row g-3" id="recsGrid"></div>
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- /tab-content -->
+  </div> <!-- /container -->
+
+  <script>
+    // ---------- Data from backend ----------
+    const AUTO = {{ (val_autofill_map or {}) | tojson | safe }};
+    const DEMO_PAIRS = {{ (demo_pairs or []) | tojson | safe }};
+
+    // ---------- Predict: user->business auto-fill ----------
+    const userSelect = document.getElementById('user_select');
+    const bizSelect  = document.getElementById('biz_select');
+
+    function ensureOption(selectEl, value, label) {
+      if (!selectEl) return;
+      const v = String(value);
+      let opt = Array.from(selectEl.options).find(o => o.value === v);
+      if (!opt) {
+        opt = new Option(label ?? v, v);
+        selectEl.insertBefore(opt, selectEl.firstChild);
+      }
+    }
+    function ensureBizOption(bid) { ensureOption(bizSelect, bid, bid); }
+
+    if (userSelect && bizSelect) {
+      userSelect.addEventListener('change', e => {
+        const uid  = e.target.value;
+        const info = AUTO && AUTO[uid];
+        if (!info) return;
+        ensureBizOption(info.bid);
+        bizSelect.value = info.bid;
+      });
+    }
+
+    // ---------- Demo pairs: pagination & rendering ----------
+    const PAGE_SIZE = 6;
+    let pageIndex = 0;
+
+    const pairsGrid = document.getElementById('pairsGrid');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    const emptyNote = document.getElementById('pairsEmpty');
+
+    function fmtRating(x) {
+      if (x === null || x === undefined || x === 'N/A') return 'N/A';
+      const n = Number(x);
+      return Number.isFinite(n) ? n.toFixed(2) : 'N/A';
+    }
+    function shortId(id) { return id ? String(id).slice(0, 6) + '…' : ''; }
+
+    function bindUsePairButtons() {
+      document.querySelectorAll('.use-pair').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const uid = btn.getAttribute('data-user');
+          const bid = btn.getAttribute('data-biz');
+          ensureUserOption(uid);
+          ensureOption(bizSelect,  bid, bid);
+          userSelect.value = uid;
+          bizSelect.value  = bid;
+
+          const predictTabBtn = document.getElementById('predict-tab');
+          if (predictTabBtn) bootstrap.Tab.getOrCreateInstance(predictTabBtn).show();
+          userSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+    }
+
+    function renderPairsPage() {
+      const total = DEMO_PAIRS.length;
+      if (!total) {
+        emptyNote.classList.remove('grid-empty');
+        pairsGrid.innerHTML = '';
+        pageIndicator.textContent = 'Page 0/0';
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        return;
+      }
+      emptyNote.classList.add('grid-empty');
+
+      const pages = Math.ceil(total / PAGE_SIZE);
+      if (pageIndex >= pages) pageIndex = pages - 1;
+      if (pageIndex < 0) pageIndex = 0;
+
+      const start = pageIndex * PAGE_SIZE;
+      const items = DEMO_PAIRS.slice(start, start + PAGE_SIZE);
+
+      pairsGrid.innerHTML = '';
+      items.forEach(p => {
+        const userName = p.user_name || p.user || 'User';
+        const bizName  = p.business_name || p.biz_name || p.business_id || 'Business';
+        const actTxt   = fmtRating(p.actual_rating);
+        const badges   = Array.isArray(p.badges) ? p.badges : (p.badge ? [p.badge] : []);
+
+        const col = document.createElement('div');
+        col.className = 'col-sm-6';
+        col.innerHTML = `
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start">
+                <h6 class="card-title mb-2">${bizName} <small class="text-muted id-chip">(${shortId(p.business_id)})</small></h6>
+              </div>
+              <div class="small mb-2">
+                <span class="text-muted">by</span>
+                <span class="user-name">${userName}</span>
+                <span class="id-chip text-muted">(${shortId(p.user_id)})</span>
+              </div>
+              <div class="mb-2">
+                ${badges.slice(0,2).map(t => `<span class="badge me-1 bg-secondary">${t}</span>`).join('')}
+              </div>
+              <div class="small mb-3"><span class="text-muted">Actual:</span> ${actTxt}</div>
+              <div class="mt-auto">
+                <button type="button" class="btn btn-outline-primary w-100 use-pair"
+                        data-user="${p.user_id}" data-biz="${p.business_id}">
+                  Use this pair
+                </button>
+              </div>
+            </div>
+          </div>`;
+        pairsGrid.appendChild(col);
+      });
+
+      pageIndicator.textContent = `Page ${pageIndex + 1}/${Math.ceil(total / PAGE_SIZE)}`;
+      prevBtn.disabled = pageIndex === 0;
+      nextBtn.disabled = pageIndex >= Math.ceil(total / PAGE_SIZE) - 1;
+
+      bindUsePairButtons();
+    }
+
+    prevBtn?.addEventListener('click', () => { pageIndex = Math.max(0, pageIndex - 1); renderPairsPage(); });
+    nextBtn?.addEventListener('click', () => {
+      const pages = Math.ceil(DEMO_PAIRS.length / PAGE_SIZE);
+      pageIndex = Math.min(pages - 1, pageIndex + 1);
+      renderPairsPage();
+    });
+
+    renderPairsPage();
+
+    // ---------- Recommend: clone user options + call /api/recommend ----------
+    const recUserSelect = document.getElementById('rec_user_select');
+    const recUserManual = document.getElementById('rec_user_manual');
+    const recK = document.getElementById('rec_k');
+    const recsGrid = document.getElementById('recsGrid');
+    const recAlert = document.getElementById('recAlert');
+
+    function syncRecUserOptions() {
+      if (!userSelect || !recUserSelect) return;
+      recUserSelect.innerHTML = '';
+      recUserSelect.add(new Option('-- pick a user --', ''));
+      Array.from(userSelect.options).forEach(opt => {
+        if (opt.value) recUserSelect.add(new Option(opt.text, opt.value));
+      });
+    }
+    syncRecUserOptions();
+
+    function ensureUserOption(uid) {
+      ensureOption(userSelect, uid, uid);
+      ensureOption(recUserSelect, uid, uid);
+    }
+
+    document.getElementById('btnGetRecs').addEventListener('click', async () => {
+      recAlert.classList.add('d-none');
+      recAlert.textContent = '';
+
+      const uid = (recUserManual.value || recUserSelect.value || '').trim();
+      const k = parseInt(recK.value, 10) || 5;
+
+      if (!uid) {
+        recAlert.textContent = 'Please select or enter a user id.';
+        recAlert.classList.remove('d-none');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: uid, k })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || res.statusText);
+
+        const uname = data.user_name || 'N/A';
+        const responseUid = data.user_id || '';
+        recHeader.textContent = `Recommendations for ${uname} ${responseUid ? `(${responseUid})` : ''}`;
+
+        const list = data.recommendations || [];
+        recsGrid.innerHTML = '';
+        if (!list.length) {
+          recsGrid.innerHTML = '<div class="text-muted">No recommendations.</div>';
+          return;
+        }
+
+        list.forEach(r => {
+          const col = document.createElement('div');
+          col.className = 'col-md-6 col-lg-4';
+          col.innerHTML = `
+            <div class="card h-100">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title mb-1">${r.business_name || responseUid}</h6>
+                <div class="text-muted mb-1">${r.city || '—'}, ${r.state || '—'}</div>
+                <div class="fs-5 mb-3">Predicted: ${Number(r.predicted_rating).toFixed(2)}</div>
+                <button type="button" class="btn btn-outline-primary mt-auto predict-this"
+                        data-biz="${r.business_id}" data-user="${data.user_id}">
+                  Use in Predict
+                </button>
+                <div class="form-text mt-2">Business ID: <span class="id-chip">${r.business_id}</span></div>
+              </div>
+            </div>`;
+          recsGrid.appendChild(col);
+        });
+
+        document.querySelectorAll('.predict-this').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const bid = btn.getAttribute('data-biz');
+            const uidFromRes = btn.getAttribute('data-user') || uid;
+            ensureUserOption(uidFromRes);
+            ensureOption(bizSelect, bid, bid);
+            userSelect.value = uidFromRes;
+            bizSelect.value  = bid;
+
+            const predictTabBtn = document.getElementById('predict-tab');
+            if (predictTabBtn) bootstrap.Tab.getOrCreateInstance(predictTabBtn).show();
+            userSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+        });
+
+      } catch (err) {
+        recsGrid.innerHTML = '';
+        recAlert.textContent = err.message || 'Failed to fetch recommendations.';
+        recAlert.classList.remove('d-none');
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
