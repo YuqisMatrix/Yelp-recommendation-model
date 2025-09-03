@@ -7,8 +7,12 @@ This project addresses two core business problems:
 
 2. Personalized Recommendation: Based on these predicted ratings, how can we recommend the most relevant businesses to each user?
 
-To solve these problems, we developed a hybrid recommendation system that combines XGBoost regression with item-based collaborative filtering. The system is deployed as a live Flask web app with two main API endpoints: one for predicting ratings and one for generating top-K recommendations. Live web application demo: [![Live Demo](https://img.shields.io/badge/Demo-Live%20App-brightgreen?style=for-the-badge)](https://yelp-demo-379273568378.us-central1.run.app/)
-.
+To solve these problems, we developed a hybrid recommendation system that combines XGBoost regression with item-based collaborative filtering. The system is deployed as a live Flask web app with two main API endpoints: one for predicting ratings and one for generating top-K recommendations. 
+### Live web application demo: [![Live Demo](https://img.shields.io/badge/Demo-Live%20App-brightgreen?style=for-the-badge)](https://yelp-demo-379273568378.us-central1.run.app/).
+
+
+### Getting Started
+For setup instructions and usage examples, refer to [README.md](README.md).
 
 ![yelp image](image/yelp.png)
 
@@ -85,7 +89,7 @@ To understand how customer satisfaction varies across industries, we analyze Yel
 Since each business can belong to multiple categories (e.g., "Restaurants; Bars; Nightlife"), we split the category field and calculate the mean rating for each category.  
 
 
-![top 20 business by avg star image](image/top20bus-bystar.png)
+![top 20 business by avg star image](image/top-20bus-bystar.png)
 
 ### Insights
 - Active Life and Hair Salons receive the highest average ratings (~4.0), reflecting strong customer satisfaction.  
@@ -270,7 +274,7 @@ Item similarities are computed offline. Online latency is dominated by candidate
 
 -- 
 
-## 8. 
+## 8. Model Evaluation
 - **Linear regression **: Simple average rating  
 - **Collaborative Filtering**: ietm-based 
 - **Feature-Based Regression**: XGBoost using user and business features  
