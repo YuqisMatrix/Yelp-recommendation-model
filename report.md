@@ -1,4 +1,4 @@
-# Yelp Rating Prediction and Recommendation Project 
+# Full stack Yelp Rating Prediction and Recommendation Project
 
 ##  1. Overview
 This project addresses two core business problems:
