@@ -1,18 +1,35 @@
 # Yelp Recommendation System
 
-A machine learning-based recommendation system for predicting Yelp user ratings of businesses.  
-This project is containerized with Docker for consistent deployment across environments.
+A hybrid machine learning system for Yelp that supports two core functions:  
+1. **Predict** – estimate a user’s rating for a specific business  
+2. **Recommend** – generate Top-K personalized business recommendations  
+
+The project is containerized with Docker for consistent deployment across environments.  
+For full methodology and analysis, see [report.md](report.md).
 
 ## Features
 
-- Personalized rating predictions using collaborative filtering and business/user features  
-- Flask + Gunicorn backend API  
-- Apache Spark for scalable data processing  
-- Dockerized environment for easy deployment  
-- Preloaded trained model and dataset for out-of-the-box usage  
-- Health check endpoint for service monitoring  
+- **Two Modes of Use**  
+  - **Predict** ratings given a user–business pair  
+  - **Recommend** Top-K businesses for a given user  
+- **Hybrid Model**: Combines XGBoost (feature-based) and Collaborative Filtering (community patterns)  
+- **Flask + Gunicorn API** with interactive demo UI  
+- **Apache Spark** for large-scale preprocessing and similarity computation  
+- **Dockerized environment** for easy setup and deployment  
+- **Preloaded model & dataset** for out-of-the-box usage  
+- **Health check endpoint** for monitoring service status
 
 
+
+## Tech Stack
+
+- **Machine Learning**: XGBoost, Scikit-learn  
+- **Recommendation**: Collaborative Filtering (item-based, Pearson similarity)  
+- **Data Processing**: Apache Spark, Pandas  
+- **Backend API**: Flask, Gunicorn  
+- **Containerization**: Docker  
+- **Frontend**: Bootstrap, Jinja2 templates  
+- **Utilities**: Pickle (model persistence), Logging, NumPy  
 
 
 ## Data Files
@@ -200,7 +217,7 @@ Example Response:
 
 Model Performance
 
-RMSE: ~0.96 (validation)
+RMSE: ~0.98 (validation)
 
 Average API latency: ~34ms
 
