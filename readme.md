@@ -1,13 +1,14 @@
-# Yelp Recommendation System
+# Full Stack Yelp Recommendation System using data mining. 
 
 A hybrid machine learning system for Yelp that supports two core functions:  
-1. **Predict** – estimate a user’s rating for a specific business  
+1. **Predict** – predict a user’s rating for a specific business  
 2. **Recommend** – generate Top-K personalized business recommendations  
 
 The project is containerized with Docker for consistent deployment across environments.  
-For full methodology and analysis, see [report.md](report.md).
+## For full methodology and analysis, see [report.md](report.md).
+## Live web application demo: [![Live Demo](https://img.shields.io/badge/Demo-Live%20App-brightgreen?style=for-the-badge)](https://yelp-demo-379273568378.us-central1.run.app/)
 
-## Features
+## Features 
 
 - **Two Modes of Use**  
   - **Predict** ratings given a user–business pair  
@@ -24,7 +25,7 @@ For full methodology and analysis, see [report.md](report.md).
 ## Tech Stack
 
 - **Machine Learning**: XGBoost, Scikit-learn  
-- **Recommendation**: Collaborative Filtering (item-based, Pearson similarity)  
+- **Recommendation**: Data Mining, Collaborative Filtering (item-based, Pearson similarity)  
 - **Data Processing**: Apache Spark, Pandas  
 - **Backend API**: Flask, Gunicorn  
 - **Containerization**: Docker  
