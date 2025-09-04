@@ -275,8 +275,8 @@ Item similarities are computed offline. Online latency is dominated by candidate
 -- 
 
 ## 8. Model Evaluation
-- **Linear regression **: Simple average rating  
-- **Collaborative Filtering**: ietm-based 
+- **Linear Regression**: Using the same features as below
+- **Collaborative Filtering**: item-based 
 - **Feature-Based Regression**: XGBoost using user and business features  
 - **Hybrid Model**: Combined predictions from both XGBoost and CF
 
