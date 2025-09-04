@@ -8,6 +8,11 @@ The project is containerized with Docker for consistent deployment across enviro
 ## For full methodology and analysis, see [report.md](report.md).
 ## Live web application demo: [![Live Demo](https://img.shields.io/badge/Demo-Live%20App-brightgreen?style=for-the-badge)](https://yelp-demo-379273568378.us-central1.run.app/)
 
+### Screenshots
+![Main Interface](image/rec-predict.png)
+![Prediction Example](image/rec-prediict-res.png)
+![Recommendations](image/rec-top5.png)
+
 ## Features 
 
 - **Two Modes of Use**  
