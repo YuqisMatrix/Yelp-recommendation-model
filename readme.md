@@ -10,7 +10,7 @@ The project is containerized with Docker for consistent deployment across enviro
 
 ### Screenshots
 ![Main Interface](image/rec-predict.png)
-![Prediction Example](image/rec-prediict-res.png)
+![Prediction Example](image/rec-predict-res.png)
 ![Recommendations](image/rec-top5.png)
 
 ## Features 
